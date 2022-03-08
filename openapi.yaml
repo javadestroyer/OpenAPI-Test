@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  description: this is the OpenAPI for MetaSuche.
+  title: MetaSuche API
+  version: 0.1.0
+servers:
+- url: http://127.0.0.1:5000
+paths:
+  /Search:
+    get:
+      description: Returns a list of repositoroes depending on the search word
+      parameters:
+      - in: query
+        name: SearchQuery
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Repositories'
+          description: Mathching list of repositories to the given search'
+      x-accepts: application/json
+components:
+  schemas:
+    Repositories:
+      items:
+        $ref: '#/components/schemas/Repository'
+      type: array
+    Repository:
+      example:
+        name: name
+        link: link
+      properties:
+        name:
+          type: string
+        link:
+          type: string
+      required:
+      - name
+      type: object
+
